@@ -4,6 +4,8 @@
  */
 
 module.exports = {
-  // The directory where Jest should output its coverage files
+  transform: {
+    "^.+\\.ts?$": "ts-jest",
+  },
   coverageDirectory: "coverage",
 };
