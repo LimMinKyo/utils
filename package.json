@@ -3,8 +3,6 @@
   "version": "1.0.0",
   "description": "",
   "scripts": {
-    "build": "tsc --build",
-    "clean": "tsc --build --clean",
     "test": "jest",
     "test:watch": "jest --watch",
     "test:cov": "jest --coverage"
