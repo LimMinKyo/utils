@@ -5,6 +5,7 @@ import {
   addComma,
   removeComma,
   toLoginId,
+  getFullAddress,
 } from "./format";
 
 describe("toContactNumber", () => {
@@ -85,5 +86,14 @@ describe("toLoginId", () => {
   });
   it("asd123-,_@#$ (-,_이외 특수문자 안됌)", () => {
     expect(toLoginId("asd123-,_@#$")).toEqual("asd123-,_");
+  });
+});
+
+describe("getFullAddress", () => {
+  it("상세 주소가 있는 경우", () => {
+    expect(getFullAddress("주소", "상세 주소")).toEqual("주소, 상세 주소");
+  });
+  it("상세 주소가 없는 경우", () => {
+    expect(getFullAddress("주소", null)).toEqual("주소");
   });
 });

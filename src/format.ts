@@ -67,3 +67,12 @@ export const toLoginId = (value = "") => {
   const formattedValue = value.replace(/[^ㄱ-ㅎ가-힣a-z0-9-,_]/gi, "");
   return formattedValue;
 };
+
+/**
+ * 전체 주소 형식으로 변환해주는 유틸함수
+ * @param address 도로명 주소 or 지번 주소
+ * @param addrDetail 상세주소
+ */
+export const getFullAddress = (address: string, addrDetail?: string | null) => {
+  return `${address}${addrDetail ? `, ${addrDetail}` : ""}`;
+};
