@@ -19,8 +19,8 @@ export const toContactNumber = (value = "") => {
  * @param phone
  * @return 하이픈(-) 삭제된 문자열 반환
  */
-export const removeHyphen = (phone = "") => {
-  return phone.toString().replaceAll("-", "");
+export const removeHyphen = (value = "") => {
+  return value.toString().replaceAll("-", "");
 };
 
 /**
