@@ -41,8 +41,8 @@ describe("downloadFile", () => {
 
     expect(link.href).toEqual(testUrl);
 
-    expect(setAttribute).toHaveBeenCalledTimes(1);
-    expect(setAttribute).toHaveBeenCalledWith("download", mockFileName);
+    expect(link.setAttribute).toHaveBeenCalledTimes(1);
+    expect(link.setAttribute).toHaveBeenCalledWith("download", mockFileName);
 
     expect(document.body.appendChild).toHaveBeenCalledTimes(1);
     expect(document.body.appendChild).toHaveBeenCalledWith(link);
