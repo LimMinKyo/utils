@@ -7,19 +7,17 @@ import { downloadFile } from "./file";
 describe("downloadFile", () => {
   it("should success download a file.", () => {
     // given
-    const setAttribute = jest.fn();
-    const click = jest.fn();
-    const testUrl = "https://test-url.com";
-    const link = {
+    const mockUrl = "https://test-url.com";
+    const mockLink = {
       href: "",
-      setAttribute,
-      click,
+      setAttribute: jest.fn(),
+      click: jest.fn(),
     };
     const mockBlob = { size: 1024, type: "application/pdf" };
     const mockData = "data";
-    const mockFileName = "test.png";
-    window.URL.createObjectURL = jest.fn(() => testUrl);
-    document.createElement = jest.fn(() => link as any);
+    const mockFileName = "test.pdf";
+    window.URL.createObjectURL = jest.fn(() => mockUrl);
+    document.createElement = jest.fn(() => mockLink as any);
     document.body.appendChild = jest.fn();
     document.body.removeChild = jest.fn();
     const blobSpy = jest
@@ -39,17 +37,20 @@ describe("downloadFile", () => {
     expect(document.createElement).toHaveBeenCalledTimes(1);
     expect(document.createElement).toHaveBeenCalledWith("a");
 
-    expect(link.href).toEqual(testUrl);
+    expect(mockLink.href).toEqual(mockUrl);
 
-    expect(link.setAttribute).toHaveBeenCalledTimes(1);
-    expect(link.setAttribute).toHaveBeenCalledWith("download", mockFileName);
+    expect(mockLink.setAttribute).toHaveBeenCalledTimes(1);
+    expect(mockLink.setAttribute).toHaveBeenCalledWith(
+      "download",
+      mockFileName
+    );
 
     expect(document.body.appendChild).toHaveBeenCalledTimes(1);
-    expect(document.body.appendChild).toHaveBeenCalledWith(link);
+    expect(document.body.appendChild).toHaveBeenCalledWith(mockLink);
 
-    expect(link.click).toHaveBeenCalledTimes(1);
+    expect(mockLink.click).toHaveBeenCalledTimes(1);
 
     expect(document.body.removeChild).toHaveBeenCalledTimes(1);
-    expect(document.body.removeChild).toHaveBeenCalledWith(link);
+    expect(document.body.removeChild).toHaveBeenCalledWith(mockLink);
   });
 });
