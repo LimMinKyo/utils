@@ -17,12 +17,14 @@ describe("downloadFile", () => {
     const mockData = "data";
     const mockFileName = "test.pdf";
     window.URL.createObjectURL = jest.fn(() => mockUrl);
-    document.createElement = jest.fn(() => mockLink as any);
+    document.createElement = jest.fn(
+      () => mockLink as unknown as HTMLAnchorElement
+    );
     document.body.appendChild = jest.fn();
     document.body.removeChild = jest.fn();
     const blobSpy = jest
       .spyOn(global, "Blob")
-      .mockImplementation(() => mockBlob as any);
+      .mockImplementation(() => mockBlob as unknown as Blob);
 
     // when
     downloadFile(mockData, mockFileName);
