@@ -24,17 +24,26 @@ describe("toContactNumber", () => {
   it("050512345678 -> 0505-1234-5678", () => {
     expect(toContactNumber("050512345678")).toEqual("0505-1234-5678");
   });
+  it("undefined", () => {
+    expect(toContactNumber(undefined)).toEqual("");
+  });
 });
 
 describe("removeHyphen", () => {
   it("010-2222-3333 -> 01022223333", () => {
     expect(removeHyphen("010-2222-3333")).toEqual("01022223333");
   });
+  it("undefined", () => {
+    expect(removeHyphen(undefined)).toEqual("");
+  });
 });
 
 describe("toBizNumber", () => {
   it("1112233333 -> 111-22-33333", () => {
     expect(toBizNumber("1112233333")).toEqual("111-22-33333");
+  });
+  it("undefined", () => {
+    expect(toBizNumber(undefined)).toEqual("");
   });
 });
 
@@ -57,8 +66,8 @@ describe("addComma", () => {
   it("0 -> 0", () => {
     expect(addComma("0")).toEqual("0");
   });
-  it("'' -> ''", () => {
-    expect(addComma("")).toEqual("");
+  it("undefined", () => {
+    expect(addComma(undefined)).toEqual("");
   });
 });
 
@@ -72,8 +81,8 @@ describe("removeComma", () => {
   it("0 -> 0", () => {
     expect(removeComma("0")).toEqual("0");
   });
-  it("'' -> ''", () => {
-    expect(removeComma("")).toEqual("");
+  it("undefined", () => {
+    expect(removeComma(undefined)).toEqual("");
   });
 });
 
@@ -86,6 +95,9 @@ describe("toLoginId", () => {
   });
   it("asd123-,_@#$ (-,_이외 특수문자 안됌)", () => {
     expect(toLoginId("asd123-,_@#$")).toEqual("asd123-,_");
+  });
+  it("undefined", () => {
+    expect(toLoginId(undefined)).toEqual("");
   });
 });
 
