@@ -1,9 +1,14 @@
+/**
+ * @jest-environment jsdom
+ */
+
 import {
   validatePhoneNumber,
   validateEmail,
   validatePassword,
   validateContactNumber,
   validateFileSize,
+  isClientBrowser,
 } from "./validate";
 
 describe("validatePhoneNumber", () => {
@@ -114,5 +119,18 @@ describe("validateContactNumber", () => {
   });
   it("undefined (실패)", () => {
     expect(validateContactNumber(undefined)).toBeFalsy();
+  });
+});
+
+describe("isClientBrowser", () => {
+  it("should return true if window exists.", () => {
+    const originWindow = { ...window };
+    jest.spyOn(global, "window", "get").mockReturnValue({ ...originWindow });
+
+    expect(isClientBrowser()).toBeTruthy();
+  });
+  it("should return false if window is not exists.", () => {
+    jest.spyOn<any, any>(global, "window", "get").mockReturnValue(undefined);
+    expect(isClientBrowser()).toBeFalsy();
   });
 });
