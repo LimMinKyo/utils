@@ -5,12 +5,13 @@
  */
 export const downloadFile = (data: BlobPart, fileName: string) => {
   const url = window.URL.createObjectURL(new Blob([data]));
-  const link = document.createElement("a");
-  link.href = url;
-  link.setAttribute("download", fileName);
-  document.body.appendChild(link);
-  link.click();
-  document.body.removeChild(link);
+  const a = document.createElement("a");
+  a.href = url;
+  a.download = fileName;
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  window.URL.revokeObjectURL(url);
 };
 
 /**
@@ -30,6 +31,7 @@ export const downloadFileByHttp = async (url: string, fileName: string) => {
       a.download = fileName;
       document.body.appendChild(a);
       a.click();
-      a.remove();
+      document.body.removeChild(a);
+      window.URL.revokeObjectURL(url);
     });
 };
